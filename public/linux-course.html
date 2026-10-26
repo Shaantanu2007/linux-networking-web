@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#07121a">
+  <meta name="description" content="Learn Linux step by step: distributions, shell basics, files, permissions, processes, packages, logs, and scripting.">
+  <title>Linux Course | Linux Learning Hub</title><link rel="icon" href="/icon.svg" type="image/svg+xml"><link rel="stylesheet" href="/css/styles.css"><script src="/js/app.js" defer></script>
+</head>
+<body data-page="linux-course">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header"><div class="container header-inner">
+    <a class="brand" href="/index.html" aria-label="Linux Learning Hub home"><span class="brand-mark" aria-hidden="true">&gt;_</span><span class="brand-copy"><span class="brand-name">Linux Learning Hub</span><span class="brand-tagline">Learn by doing</span></span></a>
+    <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-nav"><span class="nav-toggle-lines" aria-hidden="true"></span></button>
+    <nav class="primary-nav" id="primary-nav" aria-label="Main navigation"><a href="/linux-course.html" aria-current="page">Linux</a><a href="/commands.html">Commands</a><a href="/networking.html">Networking</a><a href="/practice.html">Practice</a><a href="/notes.html">Notes</a><a href="/quizzes.html">Quizzes</a></nav>
+    <div class="header-actions"><a class="button button-secondary button-small" href="/login.html">Log in</a><a class="button button-small" href="/signup.html">Get started</a></div>
+  </div></header>
+  <main id="main-content">
+    <section class="page-hero"><div class="container"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/index.html">Home</a><span aria-hidden="true">/</span><span aria-current="page">Linux course</span></nav><p class="eyebrow">Linux foundations · 11 modules</p><h1>Get comfortable at the command line.</h1><p class="lead">Learn the ideas behind Linux in small, practical steps. Each module has a short lesson, an example to try, a takeaway, and a quick check.</p></div></section>
+    <section class="section"><div class="container content-layout">
+      <div class="content-main">
+        <section class="content-section" id="overview"><p class="section-kicker">Module 01</p><h2>Linux, the kernel, and distributions</h2><p>Linux is the open-source kernel that manages hardware and lets software communicate with it. A Linux distribution combines that kernel with utilities, an installer, a package manager, and a release process. Ubuntu, Debian, Fedora, and Arch are different distributions built around the same core idea.</p><div class="note-card"><strong>Learning objective</strong><p>Describe the difference between the Linux kernel and a distribution, and identify why distributions package software differently.</p></div><h3>Why distributions matter</h3><p>They differ in release cadence, defaults, support, and package tools. A command may exist on all of them while its installation instructions vary. Check your distribution before following system-level instructions.</p><div class="code-block"><span class="comment"># Identify the operating system release, when available</span>
+cat /etc/os-release</div><div class="callout"><strong>Takeaway:</strong> Linux is the kernel; a distribution is a complete operating system built around it.</div><details class="quick-check"><summary>Quick check: Is Ubuntu a kernel or a distribution?</summary><p><strong>Answer:</strong> A distribution. It includes the Linux kernel plus tools, packages, and a supported release.</p></details></section>
+
+        <section class="content-section" id="terminal"><p class="section-kicker">Module 02</p><h2>Terminal and shell basics</h2><p>A terminal is an application that displays text input and output. A shell reads commands and starts programs. Bash and Zsh are common shells. Commands usually follow this pattern:</p><div class="code-block"><span class="accent">command</span> [options] [arguments]
+
+<span class="comment"># Print the current working directory</span>
+pwd
+
+<span class="comment"># Ask ls to include hidden entries and details</span>
+ls -la</div><div class="note-card"><strong>Learning objective</strong><p>Tell a command, an option, and an argument apart. Try the examples in the simulated practice terminal.</p></div><p>Options change how a command behaves; arguments tell it what to act on. Use <code class="inline-code">--help</code> or a manual page such as <code class="inline-code">man ls</code> to learn more on a real Linux system.</p><div class="callout"><strong>Takeaway:</strong> Read the whole command before pressing Enter: command, options, then arguments.</div><details class="quick-check"><summary>Quick check: In <code>ls -la /home</code>, what is <code>/home</code>?</summary><p><strong>Answer:</strong> The argument: the directory that <code>ls</code> should list.</p></details></section>
+
+        <section class="content-section" id="filesystem"><p class="section-kicker">Module 03</p><h2>Filesystem and paths</h2><p>Linux presents files and devices in one directory tree that begins at <code class="inline-code">/</code>, called the root directory. A path is either absolute (starts at <code class="inline-code">/</code>) or relative (starts from your current directory). The special entries <code class="inline-code">.</code> and <code class="inline-code">..</code> mean “here” and “parent.”</p><div class="table-wrap"><table><thead><tr><th>Path</th><th>Common purpose</th></tr></thead><tbody><tr><td><code>/home</code></td><td>Personal directories for users</td></tr><tr><td><code>/etc</code></td><td>System-wide configuration files</td></tr><tr><td><code>/var</code></td><td>Variable data such as logs and caches</td></tr><tr><td><code>/tmp</code></td><td>Temporary files</td></tr><tr><td><code>/usr</code></td><td>Many user-space programs and shared resources</td></tr></tbody></table></div><div class="code-block">pwd
+cd /home/learner
+cd ../shared</div><div class="callout"><strong>Takeaway:</strong> Start an absolute path at <code>/</code>; interpret a relative path from your current location.</div><details class="quick-check"><summary>Quick check: What does <code>..</code> mean in a path?</summary><p><strong>Answer:</strong> The parent directory of the current location.</p></details></section>
+
+        <section class="content-section" id="files"><p class="section-kicker">Module 04</p><h2>Files and directories</h2><p>Use commands to navigate, create, inspect, and organize files. These examples are safe to try in this site&apos;s virtual filesystem; on a real system, double-check paths before changing or deleting anything.</p><div class="code-block">mkdir practice
+cd practice
+touch notes.txt
+echo "first line" &gt; notes.txt
+cat notes.txt
+cp notes.txt copy.txt
+mv copy.txt archive.txt
+ls -l</div><p><code class="inline-code">rm</code> removes files. It may not move them to a recycle bin. Learn its behavior in the simulator before using it on a real system. <code class="inline-code">less</code>, <code class="inline-code">head</code>, and <code class="inline-code">tail</code> help inspect longer files.</p><div class="callout"><strong>Takeaway:</strong> Understand the target path before copying, moving, or removing a file.</div><details class="quick-check"><summary>Quick check: Which command makes an empty file?</summary><p><strong>Answer:</strong> <code>touch filename</code> creates an empty file if it does not already exist.</p></details></section>
+
+        <section class="content-section" id="search"><p class="section-kicker">Module 05</p><h2>Viewing and searching text</h2><p>Text tools help you inspect output and locate information. <code class="inline-code">grep</code> searches text for a pattern; <code class="inline-code">find</code> searches directories for files by name or other properties. A pipe passes one command&apos;s output to another command.</p><div class="code-block">grep "TODO" notes.txt
+find . -name "*.txt"
+ls -la | head</div><div class="note-card"><strong>Learning objective</strong><p>Choose a text search when you know what content you want, and a file search when you need to locate a path.</p></div><div class="callout"><strong>Takeaway:</strong> Small tools can be combined; the pipe symbol sends output to the next command.</div><details class="quick-check"><summary>Quick check: Use <code>grep</code> to find text or files?</summary><p><strong>Answer:</strong> Text. Use <code>find</code> to locate files and directories by path or properties.</p></details></section>
+
+        <section class="content-section" id="permissions"><p class="section-kicker">Module 06</p><h2>Users, groups, and permissions</h2><p>Linux permissions are shown for an owner, a group, and everyone else. The letters <code class="inline-code">r</code>, <code class="inline-code">w</code>, and <code class="inline-code">x</code> mean read, write, and execute. Directories use execute permission to allow traversal.</p><div class="code-block">ls -l report.txt
+chmod u+x script.sh
+chmod 640 report.txt</div><p>In numeric permissions, read is 4, write is 2, and execute is 1. The digits in <code class="inline-code">640</code> describe owner, group, and other permissions respectively. <code class="inline-code">chown</code> changes ownership and usually requires elevated privileges.</p><div class="callout callout-warning"><strong>Use care:</strong> Avoid broad permission changes such as recursively making system files writable. Grant only the access that is needed.</div><details class="quick-check"><summary>Quick check: What does permission digit <code>5</code> mean?</summary><p><strong>Answer:</strong> Read + execute (4 + 1), without write permission.</p></details></section>
+
+        <section class="content-section" id="processes"><p class="section-kicker">Module 07</p><h2>Processes and services</h2><p>A process is a running program with an ID (PID). <code class="inline-code">ps</code> shows selected processes; <code class="inline-code">top</code> presents a live view. Services are background programs managed by tools such as systemd on many distributions.</p><div class="code-block">ps aux
+# On systemd-based systems, inspect a service:
+systemctl status example.service</div><p>Stopping a process or service can interrupt work. First identify what it is and why it is running. Service-management commands and permissions vary by system.</p><div class="callout"><strong>Takeaway:</strong> Observe first; only stop processes you understand and are authorized to manage.</div><details class="quick-check"><summary>Quick check: What identifier does a process have?</summary><p><strong>Answer:</strong> A process ID, commonly abbreviated PID.</p></details></section>
+
+        <section class="content-section" id="packages"><p class="section-kicker">Module 08</p><h2>Packages and software</h2><p>A package manager installs, updates, and removes software while tracking dependencies. Debian and Ubuntu commonly use APT; Fedora uses DNF. Keep commands distribution-specific and read the proposed changes before confirming them.</p><div class="code-block"><span class="comment"># Examples for Debian/Ubuntu (not run in this practice site)</span>
+apt search package-name
+apt show package-name
+
+<span class="comment"># Example for Fedora</span>
+dnf info package-name</div><div class="callout callout-warning"><strong>Use care:</strong> Installing or updating software changes the system. Use your distribution&apos;s official repositories and guidance.</div><details class="quick-check"><summary>Quick check: Why do package-manager commands differ?</summary><p><strong>Answer:</strong> Distributions choose different package formats, tools, and release policies.</p></details></section>
+
+        <section class="content-section" id="storage"><p class="section-kicker">Module 09</p><h2>Storage and disk space</h2><p>Use <code class="inline-code">df</code> to inspect free space on mounted filesystems and <code class="inline-code">du</code> to estimate the space used by files or directories. A mounted filesystem is attached to a location in the directory tree.</p><div class="code-block">df -h
+du -sh ~/Documents</div><p>Storage layout differs between computers. Don&apos;t unmount, format, or delete data from a volume unless you know what it contains and have permission.</p><details class="quick-check"><summary>Quick check: Which command summarizes free space per filesystem?</summary><p><strong>Answer:</strong> <code>df</code>; the <code>-h</code> option formats values for people to read.</p></details></section>
+
+        <section class="content-section" id="logs"><p class="section-kicker">Module 10</p><h2>Logs and system information</h2><p>Logs record events that help diagnose issues. Their locations and access rules vary. <code class="inline-code">journalctl</code> reads the systemd journal; <code class="inline-code">tail</code> can show the end of a text file. Avoid sharing logs publicly without checking for personal or sensitive information.</p><div class="code-block">uname -a
+journalctl -n 30
+# For a log file you are permitted to read:
+tail -n 20 /var/log/example.log</div><div class="callout"><strong>Takeaway:</strong> Logs are evidence, not instructions; review their context and protect private data.</div><details class="quick-check"><summary>Quick check: Which command shows the last lines of a file?</summary><p><strong>Answer:</strong> <code>tail</code>.</p></details></section>
+
+        <section class="content-section" id="environment"><p class="section-kicker">Module 11</p><h2>Environment variables and beginner scripting</h2><p>Environment variables provide settings to programs. <code class="inline-code">PATH</code> is a list of directories the shell searches for commands. A shell script puts repeatable commands in a file; start with clear inputs, small steps, and comments.</p><div class="code-block"><span class="comment">#!/usr/bin/env bash</span>
+name="learner"
+printf 'Hello, %s\\n' "$name"
+
+<span class="comment"># Inspect a variable in your shell</span>
+echo "$PATH"</div><p>Shell behavior and quoting rules matter. Avoid copying scripts you do not understand, and do not run commands as an administrator without a clear reason.</p><div class="callout"><strong>Takeaway:</strong> Quote variable expansions when a value may contain spaces, and test small changes first.</div><details class="quick-check"><summary>Quick check: What is <code>PATH</code> used for?</summary><p><strong>Answer:</strong> It lists directories the shell searches when you enter a command name.</p></details></section>
+        <div class="hero-actions"><a class="button" href="/practice.html">Practice these commands <span aria-hidden="true">→</span></a><a class="button button-secondary" href="/quizzes.html?topic=linux">Take the Linux quiz</a></div>
+      </div>
+      <aside class="sidebar"><h2>On this page</h2><nav aria-label="Linux course modules"><a href="#overview">01 · Linux &amp; distributions</a><a href="#terminal">02 · Terminal &amp; shell</a><a href="#filesystem">03 · Filesystem &amp; paths</a><a href="#files">04 · Files &amp; directories</a><a href="#search">05 · Text &amp; search</a><a href="#permissions">06 · Permissions</a><a href="#processes">07 · Processes</a><a href="#packages">08 · Packages</a><a href="#storage">09 · Storage</a><a href="#logs">10 · Logs</a><a href="#environment">11 · Environment &amp; scripts</a></nav></aside>
+    </div></section>
+  </main>
+  <footer class="site-footer"><div class="container footer-main"><div class="footer-about"><a class="brand" href="/index.html"><span class="brand-mark" aria-hidden="true">&gt;_</span><span class="brand-copy"><span class="brand-name">Linux Learning Hub</span><span class="brand-tagline">Learn by doing</span></span></a><p>Practical lessons for the Linux command line and the networks that connect our devices.</p></div><div class="footer-column"><h2>Learn</h2><nav aria-label="Learn links"><a href="/linux-course.html">Linux course</a><a href="/commands.html">Command reference</a><a href="/networking.html">Networking course</a></nav></div><div class="footer-column"><h2>Practice</h2><nav aria-label="Practice links"><a href="/practice.html">Terminal lab</a><a href="/notes.html">My notes</a><a href="/quizzes.html">Quizzes</a></nav></div><div class="footer-column"><h2>About</h2><nav aria-label="About links"><a href="/about.html">About the hub</a><a href="mailto:hello@linuxlearninghub.example">Contact &amp; help</a><a href="/login.html">Demo account</a></nav></div></div><div class="container footer-bottom"><p>© 2026 Linux Learning Hub. Learn safely, one step at a time.</p><p>Practice terminal is simulated · No commands run on your device.</p></div></footer>
+</body>
+</html>
